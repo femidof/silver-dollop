@@ -31,6 +31,9 @@ class AuthProvider extends ChangeNotifier {
     } catch (e) {
       status = AuthStatus.Error;
       // displays error
+      print("login error");
+      print(e);
     }
+    notifyListeners();
   }
 }
