@@ -10,37 +10,46 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   double _deviceHeight;
   double _deviceWidth;
+  String _email;
+  String _password;
   GlobalKey<FormState> _formkey;
-
+  _LoginPageState() {
+    _formkey = GlobalKey<FormState>();
+  }
   @override
   Widget build(BuildContext context) {
     _deviceHeight = MediaQuery.of(context).size.height;
     _deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white70,
-      body: Column(
-        children: [
-          SafeArea(
-            // child: Center(
-            child: Shimmer.fromColors(
-              child: Text(
-                "Pinger",
-                style: GoogleFonts.pacifico(fontSize: 40),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SafeArea(
+              // child: Center(
+              child: Shimmer.fromColors(
+                child: Text(
+                  "Pinger",
+                  style: GoogleFonts.pacifico(fontSize: 40),
+                ),
+                baseColor: Colors.blue[400],
+                highlightColor: Colors.redAccent[400],
               ),
-              baseColor: Colors.blue[400],
-              highlightColor: Colors.redAccent[400],
+              // ),
             ),
-            // ),
-          ),
-          _loginPageUI(),
-        ],
+            _loginPageUI(),
+          ],
+        ),
       ),
     );
   }
 
   Widget _loginPageUI() {
+    print(_email);
+    print(_password);
     return Container(
       alignment: Alignment.center,
+      padding: EdgeInsets.symmetric(horizontal: _deviceWidth * 0.10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         mainAxisSize: MainAxisSize.max,
@@ -62,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 40,
+            height: 90,
           ),
           Text(
             "Welcome Back",
@@ -81,11 +90,121 @@ class _LoginPageState extends State<LoginPage> {
     return Container(
       child: Form(
         key: _formkey,
+        onChanged: () {},
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [],
+          children: [
+            SizedBox(
+              height: 90,
+            ),
+            _emailTextField(),
+            SizedBox(
+              height: 20,
+            ),
+            _passwordTextField(),
+            SizedBox(
+              height: 50,
+            ),
+            _loginButton(),
+            SizedBox(
+              height: 30,
+            ),
+            _registerButton(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _emailTextField() {
+    return TextFormField(
+      autocorrect: false,
+      style: TextStyle(
+        color: Colors.black,
+      ),
+      validator: (_input) {},
+      onSaved: (_input) {
+        setState(() {
+          _email = _input;
+        });
+      },
+      cursorColor: Colors.black,
+      decoration: InputDecoration(
+        hintText: "Email Address",
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _passwordTextField() {
+    return TextFormField(
+      obscureText: true,
+      autocorrect: false,
+      style: TextStyle(
+        color: Colors.black,
+      ),
+      validator: (_input) {
+        // _password
+      },
+      onSaved: (_input) {
+        setState(() {
+          _password = _input;
+        });
+      },
+      cursorColor: Colors.black,
+      decoration: InputDecoration(
+        hintText: "Password",
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _loginButton() {
+    return Container(
+      child: Center(
+        child: MaterialButton(
+          onPressed: () {
+            print("login");
+          },
+          child: Text(
+            "LOGIN",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          color: Colors.blue,
+        ),
+      ),
+    );
+  }
+
+  Widget _registerButton() {
+    return Center(
+      child: GestureDetector(
+        onTap: () {
+          print("register");
+        },
+        child: Container(
+          child: Text(
+            "REGISTER",
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w700,
+              color: Colors.black54,
+            ),
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     );
