@@ -43,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            "😀 Welcome 😀",
+            "😀 WELCOME 😀",
             style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
           ),
           Text(
