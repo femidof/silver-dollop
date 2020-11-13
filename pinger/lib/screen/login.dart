@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinger/auth/auth.dart';
+import 'package:pinger/services/snackbar_service.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -24,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     // _deviceHeight = MediaQuery.of(context).size.height;
     _deviceWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: Colors.white70,
       body: SingleChildScrollView(
@@ -53,6 +55,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _loginPageUI() {
     return Builder(builder: (BuildContext _context) {
+      SnackBarService.instance.buildContext = _context;
       _auth = Provider.of<AuthProvider>(_context);
       return Container(
         alignment: Alignment.center,
