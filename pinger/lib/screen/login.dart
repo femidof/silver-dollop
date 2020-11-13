@@ -124,8 +124,17 @@ class _LoginPageState extends State<LoginPage> {
       style: TextStyle(
         color: Colors.black,
       ),
-      validator: (_input) {},
+      validator: (_input) {
+        return _input.length != 0 && _input.contains('0')
+            ? null
+            : "Please enter a valid email";
+      },
       onSaved: (_input) {
+        setState(() {
+          _email = _input;
+        });
+      },
+      onChanged: (_input) {
         setState(() {
           _email = _input;
         });
@@ -150,11 +159,16 @@ class _LoginPageState extends State<LoginPage> {
         color: Colors.black,
       ),
       validator: (_input) {
-        // _password
+        return _input.length != 0 ? null : "Please enter a password";
       },
       onSaved: (_input) {
         setState(() {
           _password = _input;
+        });
+      },
+      onChanged: (_input) {
+        setState(() {
+          _email = _input;
         });
       },
       cursorColor: Colors.black,
@@ -174,7 +188,10 @@ class _LoginPageState extends State<LoginPage> {
       child: Center(
         child: MaterialButton(
           onPressed: () {
-            print("login");
+            if (_formkey.currentState.validate()) {
+              // login User
+              print("login");
+            }
           },
           child: Text(
             "LOGIN",
