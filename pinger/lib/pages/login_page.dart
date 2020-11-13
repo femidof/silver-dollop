@@ -41,7 +41,11 @@ class _LoginPageState extends State<LoginPage> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[_headingWidget(), _inputForm()],
+        children: <Widget>[
+          _headingWidget(),
+          _inputForm(),
+          _registerButton(),
+        ],
       ),
     );
   }
@@ -78,6 +82,8 @@ class _LoginPageState extends State<LoginPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _emailTextField(),
+            _passwordTextField(),
+            _loginButton(),
           ],
         ),
       ),
@@ -95,6 +101,57 @@ class _LoginPageState extends State<LoginPage> {
           hintText: "Email Address",
           focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.black))),
+    );
+  }
+
+  Widget _passwordTextField() {
+    return TextFormField(
+      autocorrect: false,
+      obscureText: true,
+      style: TextStyle(color: Colors.black),
+      validator: (_input) {},
+      onSaved: (_input) {},
+      cursorColor: Colors.black,
+      decoration: InputDecoration(
+          hintText: "Password",
+          focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.black))),
+    );
+  }
+
+  Widget _loginButton() {
+    return Container(
+      height: _deviceHeight * 0.06,
+      width: _deviceWidth,
+      child: MaterialButton(
+        onPressed: () {},
+        color: Colors.blueGrey,
+        child: Text(
+          "Login",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _registerButton() {
+    return GestureDetector(
+      onTap: () {
+        //TODO: Figure why ontap is not working and fix the overflow
+      },
+      child: Container(
+        height: _deviceHeight * 0.06,
+        width: _deviceWidth,
+        child: Text(
+          "Register",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 15, fontWeight: FontWeight.w700, color: Colors.black),
+        ),
+      ),
     );
   }
 }
