@@ -4,6 +4,7 @@ import 'package:pinger/auth/auth.dart';
 import 'package:pinger/services/snackbar_service.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:pinger/services/navigation_service.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -226,7 +227,7 @@ class _LoginPageState extends State<LoginPage> {
     return Center(
       child: GestureDetector(
         onTap: () {
-          print("register");
+          NavigationService.instance.navigateTo("register");
         },
         child: Container(
           child: Text(

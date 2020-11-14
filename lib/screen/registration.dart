@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pinger/services/navigation_service.dart';
 
 class RegisterationPage extends StatefulWidget {
   @override
@@ -226,7 +227,9 @@ class _RegistrationPageState extends State<RegisterationPage> {
 
   Widget _backToLoginPageButton() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        NavigationService.instance.goBack();
+      },
       child: Container(
         height: _deviceHeight * 0.06,
         width: _deviceWidth,
