@@ -27,12 +27,12 @@ class _RegistrationPageState extends State<RegisterationPage> {
       backgroundColor: Colors.grey[400],
       body: Container(
         alignment: Alignment.center,
-        child: signupPageUI(),
+        child: registerationPageUI(),
       ),
     );
   }
 
-  Widget signupPageUI() {
+  Widget registerationPageUI() {
     return Container(
       height: _deviceHeight * 0.75,
       //used 0.06 instead of 0.10
@@ -44,6 +44,8 @@ class _RegistrationPageState extends State<RegisterationPage> {
         children: <Widget>[
           _headingWidget(),
           _inputForm(),
+          _registerButton(),
+          _backToLoginPageButton(),
         ],
       ),
     );
@@ -87,6 +89,9 @@ class _RegistrationPageState extends State<RegisterationPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _imageSelectorWidget(),
+            _nameTextField(),
+            _emailTextField(),
+            _passwordTextField(),
           ],
         ),
       ),
@@ -106,6 +111,128 @@ class _RegistrationPageState extends State<RegisterationPage> {
             image: NetworkImage(
                 "https://cdn0.iconfinder.com/data/icons/occupation-002/64/programmer-programming-occupation-avatar-512.png"),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _nameTextField() {
+    return TextFormField(
+      autocorrect: false,
+      style: TextStyle(
+        color: Colors.black,
+      ),
+      validator: (_input) {
+        return _input.length != 0 ? null : "Please enter a name";
+      },
+      // onSaved: (_input) {
+      //   setState(() {
+      //     _email = _input;
+      //   });
+      // },
+      onChanged: (_input) {
+        setState(() {});
+      },
+      cursorColor: Colors.black,
+      decoration: InputDecoration(
+        hintText: "Full Name",
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _emailTextField() {
+    return TextFormField(
+      autocorrect: false,
+      style: TextStyle(
+        color: Colors.black,
+      ),
+      validator: (_input) {
+        return _input.length != 0 && _input.contains('@')
+            ? null
+            : "Please enter a valid email";
+      },
+      // onSaved: (_input) {
+      //   setState(() {
+      //     _email = _input;
+      //   });
+      // },
+      onChanged: (_input) {
+        setState(() {});
+      },
+      cursorColor: Colors.black,
+      decoration: InputDecoration(
+        hintText: "Email",
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _passwordTextField() {
+    return TextFormField(
+      autocorrect: false,
+      obscureText: true,
+      style: TextStyle(
+        color: Colors.black,
+      ),
+      validator: (_input) {
+        return _input.length != 0 ? null : "Please enter a valid password";
+      },
+      // onSaved: (_input) {
+      //   setState(() {
+      //     _email = _input;
+      //   });
+      // },
+      onChanged: (_input) {
+        setState(() {});
+      },
+      cursorColor: Colors.black,
+      decoration: InputDecoration(
+        hintText: "Password",
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _registerButton() {
+    return Container(
+      child: Center(
+        child: MaterialButton(
+          onPressed: () {},
+          child: Text(
+            "REGISTER",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          color: Colors.blue,
+        ),
+      ),
+    );
+  }
+
+  Widget _backToLoginPageButton() {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        height: _deviceHeight * 0.06,
+        width: _deviceWidth,
+        child: Icon(
+          Icons.arrow_back,
+          size: 40,
         ),
       ),
     );
