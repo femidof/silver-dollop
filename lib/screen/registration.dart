@@ -16,6 +16,9 @@ class _RegistrationPageState extends State<RegisterationPage> {
 
   GlobalKey<FormState> _formKey;
   File _image;
+  String _name;
+  String _password;
+  String _email;
 
   _RegistrationPageState() {
     _formKey = GlobalKey<FormState>();
@@ -147,7 +150,9 @@ class _RegistrationPageState extends State<RegisterationPage> {
       //   });
       // },
       onChanged: (_input) {
-        setState(() {});
+        setState(() {
+          _name = _input;
+        });
       },
       cursorColor: Colors.black,
       decoration: InputDecoration(
@@ -178,7 +183,9 @@ class _RegistrationPageState extends State<RegisterationPage> {
       //   });
       // },
       onChanged: (_input) {
-        setState(() {});
+        setState(() {
+          _email = _input;
+        });
       },
       cursorColor: Colors.black,
       decoration: InputDecoration(
@@ -208,7 +215,9 @@ class _RegistrationPageState extends State<RegisterationPage> {
       //   });
       // },
       onChanged: (_input) {
-        setState(() {});
+        setState(() {
+          _password = _input;
+        });
       },
       cursorColor: Colors.black,
       decoration: InputDecoration(
