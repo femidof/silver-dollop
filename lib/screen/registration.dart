@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:pinger/services/navigation_service.dart';
+import 'package:pinger/services/media_service.dart';
 
 class RegisterationPage extends StatefulWidget {
   @override
@@ -13,6 +15,7 @@ class _RegistrationPageState extends State<RegisterationPage> {
   double _deviceWidth;
 
   GlobalKey<FormState> _formKey;
+  File _image;
 
   _RegistrationPageState() {
     _formKey = GlobalKey<FormState>();
@@ -101,16 +104,28 @@ class _RegistrationPageState extends State<RegisterationPage> {
 
   Widget _imageSelectorWidget() {
     return Center(
-      child: Container(
-        height: _deviceHeight * 0.10,
-        width: _deviceHeight * 0.10,
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-          borderRadius: BorderRadius.circular(500),
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: NetworkImage(
-                "https://cdn0.iconfinder.com/data/icons/occupation-002/64/programmer-programming-occupation-avatar-512.png"),
+      child: GestureDetector(
+        onTap: () async {
+          File _imageFile = await MediaService.instance.getImageFromLibrary();
+
+          setState(() {
+            _image = _imageFile;
+            _image = _imageFile;
+          });
+        },
+        child: Container(
+          height: _deviceHeight * 0.10,
+          width: _deviceHeight * 0.10,
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(500),
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: _image != null
+                  ? FileImage(_image)
+                  : NetworkImage(
+                      "https://cdn0.iconfinder.com/data/icons/occupation-002/64/programmer-programming-occupation-avatar-512.png"),
+            ),
           ),
         ),
       ),
