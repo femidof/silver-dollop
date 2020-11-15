@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinger/auth/auth.dart';
+import 'package:pinger/services/navigation_service.dart';
 import 'package:pinger/services/snackbar_service.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
@@ -226,7 +227,7 @@ class _LoginPageState extends State<LoginPage> {
     return Center(
       child: GestureDetector(
         onTap: () {
-          print("register");
+          NavigationService.instance.navigateTo("register");
         },
         child: Container(
           child: Text(

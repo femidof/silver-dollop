@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:pinger/screen/login.dart';
-import 'package:pinger/screen/signup.dart';
+import 'package:pinger/screen/authentication/login.dart';
+import 'package:pinger/screen/authentication/signup.dart';
+import 'package:pinger/screen/home.dart';
+import 'package:pinger/services/navigation_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,25 +20,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'PINGER',
+      navigatorKey: NavigationService.instance.navigatorKey,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LoginPage(),
-    );
-  }
-}
-
-class AuthPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        children: [
-          SignUpPage(),
-          LoginPage(),
-        ],
-      ),
+      initialRoute: "login",
+      routes: {
+        "login": (BuildContext _context) => LoginPage(),
+        "register": (BuildContext _context) => RegisterationPage(),
+        "home": (BuildContext _context) => HomePage(),
+      },
     );
   }
 }
