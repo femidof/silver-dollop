@@ -15,13 +15,13 @@ class CloudStorageService {
     _baseRef = _storage.ref();
   }
 
-  Future<StorageTaskSnapshot> uploadUserImage(String _uid, File _image) {
-    try {
-      return _baseRef
-          .child(_profileImages)
-          .child(_uid)
-          .putFile(_image)
-          .onComplete;
-    } catch (e) {}
-  }
+  // Future<StorageTaskSnapshot> uploadUserImage(String _uid, File _image) {
+  //   try {
+  //     return _baseRef
+  //         .child(_profileImages)
+  //         .child(_uid)
+  //         .putFile(_image)
+  //         .onComplete;
+  //   } catch (e) {}
+  // }
 }
