@@ -10,6 +10,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
+  double _height;
+  double _width;
+
   TabController _tabController;
 
   _HomePageState() {
@@ -17,6 +20,8 @@ class _HomePageState extends State<HomePage>
   }
   @override
   Widget build(BuildContext context) {
+    _height = MediaQuery.of(context).size.height;
+    _width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.grey,
       appBar: AppBar(
@@ -60,9 +65,9 @@ class _HomePageState extends State<HomePage>
     return TabBarView(
       controller: _tabController,
       children: <Widget>[
-        ProfilePage(),
-        ProfilePage(),
-        ProfilePage(),
+        ProfilePage(_height, _width),
+        ProfilePage(_height, _width),
+        ProfilePage(_height, _width),
       ],
     );
   }

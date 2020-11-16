@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pinger/screen/home_page.dart';
 import 'package:pinger/screen/login.dart';
+import 'package:pinger/screen/profile_page.dart';
 import 'package:pinger/screen/signup.dart';
 import 'package:pinger/screen/registration.dart';
 import 'package:pinger/services/navigation_service.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       // initialRoute: "login",
-      initialRoute: "homepage",
+      initialRoute: "home",
       routes: {
         "login": (BuildContext _context) => LoginPage(),
         "register": (BuildContext _context) => RegisterationPage(),
