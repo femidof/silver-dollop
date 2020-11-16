@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pinger/services/navigation_service.dart';
 import 'package:pinger/services/snackbar_service.dart';
 
 enum AuthStatus {
@@ -18,7 +19,25 @@ class AuthProvider extends ChangeNotifier {
 
   AuthProvider() {
     _auth = FirebaseAuth.instance;
+    _checkCurrentUserIsAuthenticated();
   }
+
+  void _autoLogin() {
+    if (user != null) {
+      NavigationService.instance.navigateToReplacement("home");
+    }
+  }
+
+  void _checkCurrentUserIsAuthenticated() async {
+    //TODO: WORK ON THE AUTO LOGIN ERROR
+    //user = await _auth.currentUser();
+
+    if (user != null) {
+      notifyListeners();
+      _autoLogin();
+    }
+  }
+
   void loginUserWIthEmailAndPassword(String _email, String _password) async {
     status = AuthStatus.Authenticating;
     notifyListeners();
