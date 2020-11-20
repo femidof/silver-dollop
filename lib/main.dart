@@ -6,6 +6,8 @@ import 'package:pinger/screen/profile_page.dart';
 import 'package:pinger/screen/signup.dart';
 import 'package:pinger/screen/registration.dart';
 import 'package:pinger/services/navigation_service.dart';
+import 'package:provider/provider.dart';
+import 'package:pinger/auth/auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

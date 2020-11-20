@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pinger/auth/auth.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
   final double _height;
@@ -9,26 +11,37 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("Profile Page"),
+      color: Theme.of(context).backgroundColor,
+      height: _height,
+      width: _width,
+      child: ChangeNotifierProvider<AuthProvider>.value(
+        value: AuthProvider.instance,
+        child: _profilePageUI(),
+      ),
     );
   }
 
   Widget _profilePageUI() {
-    return Center(
-      child: SizedBox(
-        height: _height * 0.50,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            _userImageWidget("https://i.pravatar.cc/150?img=3"),
-            _userNameWidget("Tolu D"),
-            _userEmailWidget("duro1210@gmail.com"),
-            _logoutButton(),
-          ],
-        ),
-      ),
+    return Builder(
+      builder: (BuildContext _context) {
+        var _auth = Provider.of<AuthProvider>(_context);
+        return Center(
+          child: SizedBox(
+            height: _height * 0.50,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                _userImageWidget("https://i.pravatar.cc/150?img=3"),
+                _userNameWidget("Tolu D"),
+                _userEmailWidget("duro1210@gmail.com"),
+                _logoutButton(),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -39,11 +52,12 @@ class ProfilePage extends StatelessWidget {
       height: _imageRadius,
       width: _imageRadius,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(_imageRadius),
-          image: DecorationImage(
-            fit: BoxFit.fill,
-            image: NetworkImage(_image),
-          )),
+        borderRadius: BorderRadius.circular(_imageRadius),
+        image: DecorationImage(
+          fit: BoxFit.fill,
+          image: NetworkImage(_image),
+        ),
+      ),
     );
   }
 
