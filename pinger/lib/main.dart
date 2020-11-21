@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
         "register": (BuildContext _context) => RegisterationPage(),
         "home": (BuildContext _context) => HomePage(),
       },
+      home: LoginPage(),
     );
   }
 }
