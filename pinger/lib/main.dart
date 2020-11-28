@@ -25,13 +25,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: "login",
+      initialRoute: "login"x,
       routes: {
         "login": (BuildContext _context) => LoginPage(),
         "register": (BuildContext _context) => RegisterationPage(),
         "home": (BuildContext _context) => HomePage(),
       },
-      home: LoginPage(),
+      // home: LoginPage(),
     );
   }
 }
