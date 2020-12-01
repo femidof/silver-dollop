@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pinger/auth/auth.dart';
+import 'package:pinger/models/contact.dart';
 import 'package:provider/provider.dart';
+import 'package:pinger/services/db_service.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class ProfilePage extends StatelessWidget {
   final double _height;
   final double _width;
 
+  AuthProvider _auth;
   ProfilePage(this._height, this._width);
 
   @override
@@ -16,30 +20,41 @@ class ProfilePage extends StatelessWidget {
       width: _width,
       child: ChangeNotifierProvider<AuthProvider>.value(
         value: AuthProvider.instance,
-        child: _profilePageUI(),
+        child: _profilePageUI,
       ),
     );
   }
 
-  Widget _profilePageUI() {
+  Widget get _profilePageUI {
     return Builder(
       builder: (BuildContext _context) {
-        var _auth = Provider.of<AuthProvider>(_context);
-        return Center(
-          child: SizedBox(
-            height: _height * 0.50,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                _userImageWidget("https://i.pravatar.cc/150?img=3"),
-                _userNameWidget("Tolu D"),
-                _userEmailWidget("duro1210@gmail.com"),
-                _logoutButton(),
-              ],
-            ),
-          ),
+        _auth = Provider.of<AuthProvider>(_context);
+        return StreamBuilder<Contact>(
+          stream: DBService.instance.getUserData(_auth.user.uid),
+          builder: (_context, _snapshot) {
+            var _userData = _snapshot.data;
+            return _snapshot.hasData
+                ? Center(
+                    child: SizedBox(
+                      height: _height * 0.50,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          _userImageWidget(_userData.image),
+                          _userNameWidget(_userData.name),
+                          _userEmailWidget(_userData.email),
+                          _logoutButton(),
+                        ],
+                      ),
+                    ),
+                  )
+                : SpinKitWanderingCubes(
+                    color: Colors.blue,
+                    size: 50,
+                  );
+          },
         );
       },
     );
@@ -90,7 +105,9 @@ class ProfilePage extends StatelessWidget {
       height: _height * 0.06,
       width: _width * 0.8,
       child: MaterialButton(
-        onPressed: () {},
+        onPressed: () {
+          _auth.logoutUser(() {});
+        },
         color: Colors.red,
         child: Text(
           "Log Out",

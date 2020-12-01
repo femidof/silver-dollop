@@ -1,20 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Contact {
+class ConversationSnippet {
   final String id;
-  final String email;
+  final String conversationID;
   final String image;
-  final Timestamp lastseen;
+  final Timestamp lastMessage;
   final String name;
+  final int unseenCount;
+  final Timestamp timestamp;
 
-  Contact({this.id, this.email, this.name, this.image, this.lastseen});
+  ConversationSnippet(
+      {this.conversationID,
+      this.id,
+      this.lastMessage,
+      this.unseenCount,
+      this.timestamp,
+      this.name,
+      this.image});
 
-  factory Contact.fromFirestore(DocumentSnapshot _snapshot) {
+  factory ConversationSnippet.fromFirestore(DocumentSnapshot _snapshot) {
     var _data = _snapshot.data();
-    return Contact(
-      id: _snapshot.id,
-      lastseen: _data["lastseen"],
-      email: _data["email"],
+    return ConversationSnippet(
+      id: _snapshot.documentID,
+      conversationID: _data["conversationID"],
+      lastMessage: _data["lastMessage"] != null ? _data["lastMessage"] : "",
+      unseenCount: _data["unseenCount"],
+      timestamp: _data["timestamp"],
       name: _data["name"],
       image: _data["image"],
     );

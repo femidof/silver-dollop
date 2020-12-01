@@ -31,7 +31,10 @@ class AuthProvider extends ChangeNotifier {
       SnackBarService.instance.showSnackBarSuccess(
           "Successfully Signed In, Welcome ${user.email} ");
       // Navigate to HomePage
+
+      //TODO: change navigation back
       NavigationService.instance.navigateToReplacement("home");
+      // NavigationService.instance.navigateToReplacement("profileui");
     } catch (e) {
       status = AuthStatus.Error;
       // displays error
@@ -62,6 +65,22 @@ class AuthProvider extends ChangeNotifier {
       user = null;
       SnackBarService.instance.showSnackBarError("Error Authenticating");
       print(e);
+    }
+    notifyListeners();
+  }
+
+  void logoutUser(Future<void> onSuccess()) async {
+    try {
+      await _auth.signOut();
+      user = null;
+      status = AuthStatus.NotAuthenticated;
+      await onSuccess();
+      await NavigationService.instance.navigateToReplacement("login");
+      SnackBarService.instance
+          .showSnackBarError("You have successfully logged out!");
+    } catch (e) {
+      SnackBarService.instance
+          .showSnackBarError("An error occured while logging out.");
     }
     notifyListeners();
   }

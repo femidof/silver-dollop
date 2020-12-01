@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:pinger/screen/authentication/profile_page.dart';
+import 'package:pinger/screen/authentication/recent_conversation_page.dart';
+import 'package:pinger/screen/authentication/search_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -37,7 +39,7 @@ class _HomePageState extends State<HomePage>
               highlightColor: Colors.redAccent),
         ),
         bottom: TabBar(
-          unselectedLabelColor: Colors.black,
+          unselectedLabelColor: Colors.white,
           indicatorColor: Colors.white,
           labelColor: Colors.white,
           controller: _tabController,
@@ -71,8 +73,8 @@ class _HomePageState extends State<HomePage>
     return TabBarView(
       controller: _tabController,
       children: <Widget>[
-        ProfilePage(_height, _width),
-        ProfilePage(_height, _width),
+        SearchPage(_height, _width),
+        RecentConversationsPage(_height, _width),
         ProfilePage(_height, _width),
       ],
     );
