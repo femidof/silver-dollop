@@ -58,6 +58,7 @@ class _LoginPageState extends State<LoginPage> {
     return Builder(builder: (BuildContext _context) {
       SnackBarService.instance.buildContext = _context;
       _auth = Provider.of<AuthProvider>(_context);
+      print("OMG auth = ${_auth.status}");
       return Container(
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(horizontal: _deviceWidth * 0.10),

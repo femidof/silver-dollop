@@ -16,5 +16,6 @@ class CloudStorageService {
     } catch (e) {
       print(e);
     }
+    return null;
   }
 }
