@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -27,11 +29,13 @@ class _ConversationPageState extends State<ConversationPage> {
   double _deviceWidth;
 
   GlobalKey<FormState> _formKey;
+  ScrollController _listViewController;
   AuthProvider _auth;
 
   String _messageText;
   _ConversationPageState() {
     _formKey = GlobalKey<FormState>();
+    _listViewController = ScrollController();
     _messageText = "";
   }
   @override
@@ -77,9 +81,17 @@ class _ConversationPageState extends State<ConversationPage> {
       child: StreamBuilder<Conversation>(
         stream: DBService.instance.getConversation(this.widget._conversationID),
         builder: (BuildContext _context, _snapshot) {
+          Timer(
+            Duration(milliseconds: 50),
+            () => {
+              _listViewController
+                  .jumpTo(_listViewController.position.maxScrollExtent),
+            },
+          );
           var _conversationData = _snapshot.data;
           if (_conversationData != null) {
             return ListView.builder(
+              controller: _listViewController,
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               itemCount: _conversationData.messages.length,
               itemBuilder: (BuildContext _context, int _index) {
@@ -110,6 +122,7 @@ class _ConversationPageState extends State<ConversationPage> {
             _isOwnMessage ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: <Widget>[
           !_isOwnMessage ? _userImageWidget() : Container(),
+          SizedBox(width: 10),
           _textMessageBubble(_isOwnMessage, _message.content),
         ],
       ),
