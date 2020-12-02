@@ -39,6 +39,11 @@ class DBService {
     );
   }
 
+  Future<void> updateUserLastSeenTime(String _userID) {
+    var _ref = _db.collection(_userCollection).document(_userID);
+    return _ref.update({"lastSeen": Timestamp.now()});
+  }
+
   Stream<List<ConversationSnippet>> getUserConversations(String _userID) {
     var _ref = _db
         .collection(_userCollection)
