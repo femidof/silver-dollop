@@ -126,8 +126,6 @@ class _SearchPageState extends State<SearchPage> {
                           image: DecorationImage(
                             fit: BoxFit.fill,
                             image: NetworkImage(_userData.image),
-                            //TODO: work on that
-                            //image: NetworkImage(_data[index].image),
                           ),
                         ),
                       ),
