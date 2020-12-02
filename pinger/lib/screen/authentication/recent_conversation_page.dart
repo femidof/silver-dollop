@@ -1,11 +1,12 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:pinger/models/conversation.dart';
 import 'package:provider/provider.dart';
 import 'package:pinger/auth/auth.dart';
 import 'package:pinger/services/db_service.dart';
-// import 'package:timeago/timeago.dart' as timeago;
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:pinger/services/navigation_service.dart';
 import 'package:pinger/screen/authentication/conversation_page.dart';
 
@@ -82,7 +83,8 @@ class RecentConversationsPage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            trailing: _listTileTrailingWidgets(),
+                            trailing: _listTileTrailingWidgets(
+                                _data[_index].timestamp),
 
                             // _listTileTrailingWidgets(_data[_index].timestamp),
                           );
@@ -99,8 +101,8 @@ class RecentConversationsPage extends StatelessWidget {
   }
 
 //TODO: WOT
-  // Widget _listTileTrailingWidgets(Timestamp _lastMessagetimestamp) {
-  Widget _listTileTrailingWidgets() {
+  Widget _listTileTrailingWidgets(Timestamp _lastMessagetimestamp) {
+    // Widget _listTileTrailingWidgets() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       mainAxisSize: MainAxisSize.max,
@@ -108,8 +110,8 @@ class RecentConversationsPage extends StatelessWidget {
       children: <Widget>[
         Text(
           //TODO: WORK ON THAT
-          //timeago.format(_lastMessagetimestamp.toDate()),
-          "Lastseen",
+          timeago.format(_lastMessagetimestamp.toDate()),
+          // "Lastseen",
           style: TextStyle(fontSize: 15),
         ),
         Container(
