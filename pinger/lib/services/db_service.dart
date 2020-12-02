@@ -89,7 +89,7 @@ class DBService {
 
       if (conversation.data != null) {
         //TODO:Error here
-        // return _onSuccess(conversation.data["chatID"]);
+        return _onSuccess(conversation.data()["chatID"]);
       } else {
         var _conversationRef = _ref.doc();
         await _conversationRef.set(
