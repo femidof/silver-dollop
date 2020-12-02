@@ -4,7 +4,7 @@ class ConversationSnippet {
   final String id;
   final String conversationID;
   final String image;
-  final Timestamp lastMessage;
+  final String lastMessage;
   final String name;
   final int unseenCount;
   final Timestamp timestamp;

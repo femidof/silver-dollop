@@ -21,7 +21,7 @@ class _ConversationPageState extends State<ConversationPage> {
       //TODO: Error. Range error index. invalid value
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.blueGrey,
         title: Text(this.widget._receivername),
       ),
     );
