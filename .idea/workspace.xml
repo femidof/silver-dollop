@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e62df569-5155-4409-b0a9-79bce2d6514f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/silver-dollop.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pinger/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pinger/pubspec.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1krD8SsKFAkqtxq2czntwS2EUh9" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="io.flutter.reload.alreadyRun" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="flutter.settings" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\duro3\AndroidStudioProjects\silver-dollop\pinger" />
+      <recent name="C:\Users\duro3\AndroidStudioProjects\silver-dollop\pinger\android" />
+      <recent name="C:\Users\duro3\AndroidStudioProjects\silver-dollop\pinger\ios" />
+      <recent name="C:\Users\duro3\AndroidStudioProjects\silver-dollop\pinger\lib" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Flutter.main.dart">
+    <configuration name="&lt;template&gt;" type="Applet" default="true" selected="false">
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="main.dart" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/pinger/lib/main.dart" />
+      <option name="workingDirectory" value="$PROJECT_DIR$/pinger" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/pinger/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Flutter.main.dart" />
+        <item itemvalue="Dart Command Line App.main.dart" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e62df569-5155-4409-b0a9-79bce2d6514f" name="Default Changelist" comment="" />
+      <created>1606449656976</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1606449656976</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="91" y="6" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606450711620">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="91" y="6" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.720@0.0.1280.720" timestamp="1606450711620" />
+    <state x="282" y="33" key="#main.dart" timestamp="1606542034378">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="282" y="33" key="#main.dart/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606542034378" />
+    <state x="93" y="93" width="1095" height="535" key="AVDManager" timestamp="1606543323186">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="93" y="93" width="1095" height="535" key="AVDManager/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606543323186" />
+    <state x="93" y="93" width="1095" height="535" key="AVDManager/0.0.1280.720@0.0.1280.720" timestamp="1606451185225" />
+    <state x="430" y="89" key="AndroidProcessChooserDialog" timestamp="1606543279717">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="430" y="89" key="AndroidProcessChooserDialog/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606543279717" />
+    <state x="367" y="59" key="FileChooserDialogImpl" timestamp="1606540054284">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="367" y="59" key="FileChooserDialogImpl/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606540054284" />
+    <state width="1206" height="137" key="GridCell.Tab.0.bottom" timestamp="1606545240328">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state width="1206" height="137" key="GridCell.Tab.0.bottom/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606545240328" />
+    <state width="1206" height="150" key="GridCell.Tab.0.bottom/0.0.1280.720@0.0.1280.720" timestamp="1606453836660" />
+    <state width="1206" height="137" key="GridCell.Tab.0.center" timestamp="1606545240327">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state width="1206" height="137" key="GridCell.Tab.0.center/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606545240327" />
+    <state width="1206" height="150" key="GridCell.Tab.0.center/0.0.1280.720@0.0.1280.720" timestamp="1606453836660" />
+    <state width="1206" height="137" key="GridCell.Tab.0.left" timestamp="1606545240327">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state width="1206" height="137" key="GridCell.Tab.0.left/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606545240327" />
+    <state width="1206" height="150" key="GridCell.Tab.0.left/0.0.1280.720@0.0.1280.720" timestamp="1606453836659" />
+    <state width="1206" height="137" key="GridCell.Tab.0.right" timestamp="1606545240328">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state width="1206" height="137" key="GridCell.Tab.0.right/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606545240328" />
+    <state width="1206" height="150" key="GridCell.Tab.0.right/0.0.1280.720@0.0.1280.720" timestamp="1606453836660" />
+    <state x="32" y="0" key="SettingsEditor" timestamp="1606543294719">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="32" y="0" key="SettingsEditor/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606543294719" />
+  </component>
+</project>

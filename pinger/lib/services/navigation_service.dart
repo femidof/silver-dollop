@@ -18,7 +18,7 @@ class NavigationService {
     return navigatorKey.currentState.pushNamed(_routeName);
   }
 
-  Future<dynamic> navigateToRoute(CupertinoPageRoute _route) {
+  Future<dynamic> navigateToRoute(MaterialPageRoute _route) {
     return navigatorKey.currentState.push(_route);
   }
 

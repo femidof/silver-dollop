@@ -1,15 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:pinger/screen/authentication/profile_page.dart';
+import 'package:pinger/screen/authentication/recent_conversation_page.dart';
+import 'package:pinger/screen/authentication/search_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  double _height;
+  double _width;
+
+  TabController _tabController;
+
+  _HomePageState() {
+    _tabController = TabController(length: 3, vsync: this, initialIndex: 1);
+  }
+
   @override
   Widget build(BuildContext context) {
+    _height = MediaQuery.of(context).size.height;
+    _width = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Color.fromRGBO(3, 9, 23, 1),
       appBar: AppBar(
@@ -23,7 +38,45 @@ class _HomePageState extends State<HomePage> {
               baseColor: Colors.blueAccent,
               highlightColor: Colors.redAccent),
         ),
+        bottom: TabBar(
+          unselectedLabelColor: Colors.white,
+          indicatorColor: Colors.white,
+          labelColor: Colors.white,
+          controller: _tabController,
+          tabs: [
+            Tab(
+              icon: Icon(
+                Icons.people_outline,
+                size: 25,
+              ),
+            ),
+            Tab(
+              icon: Icon(
+                Icons.chat_bubble_outline,
+                size: 25,
+              ),
+            ),
+            Tab(
+              icon: Icon(
+                Icons.person_outline,
+                size: 25,
+              ),
+            )
+          ],
+        ),
       ),
+      body: _tabBarPages(),
+    );
+  }
+
+  Widget _tabBarPages() {
+    return TabBarView(
+      controller: _tabController,
+      children: <Widget>[
+        SearchPage(_height, _width),
+        RecentConversationsPage(_height, _width),
+        ProfilePage(_height, _width),
+      ],
     );
   }
 }
