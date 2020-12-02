@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -11,13 +10,13 @@ import 'package:pinger/auth/auth.dart';
 import 'package:pinger/models/message.dart';
 
 class ConversationPage extends StatefulWidget {
-  String _conversationID;
+  String _chatID;
   String _receiverID;
   String _receiverImage;
   String _receivername;
 
-  ConversationPage(this._conversationID, this._receiverID, this._receivername,
-      this._receiverImage);
+  ConversationPage(
+      this._chatID, this._receiverID, this._receivername, this._receiverImage);
   @override
   State<StatefulWidget> createState() {
     return _ConversationPageState();
@@ -75,16 +74,13 @@ class _ConversationPageState extends State<ConversationPage> {
   }
 
   Widget _messageListView() {
-    print("in here ");
     return Container(
       height: _deviceHeight * .75,
       width: _deviceWidth,
-      child: StreamBuilder<dynamic>(
+      child: StreamBuilder<Conversation>(
         //was changed form Conversation
-        stream: DBService.instance.getConversation(this.widget._conversationID),
+        stream: DBService.instance.getConversation(this.widget._chatID),
         builder: (BuildContext _context, _snapshot) {
-          print("tis is snapshot");
-          print(_snapshot);
           Timer(
             Duration(milliseconds: 50),
             () => {
@@ -102,10 +98,13 @@ class _ConversationPageState extends State<ConversationPage> {
                 var _message = _conversationData.messages[_index];
                 bool _isOwnMessage = _message.senderID ==
                     _auth.user.uid; //to tell who own the message
+
                 return _messageListViewChild(_isOwnMessage, _message);
               },
             );
           } else {
+            print("failure. not working show");
+
             return SpinKitWanderingCubes(
               color: Colors.white,
               size: 50,
@@ -235,7 +234,7 @@ class _ConversationPageState extends State<ConversationPage> {
         onPressed: () {
           if (_formKey.currentState.validate()) {
             DBService.instance.sendMessage(
-              this.widget._conversationID,
+              this.widget._chatID,
               Message(
                   content: _messageText,
                   timestamp: Timestamp.now(),

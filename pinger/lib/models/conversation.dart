@@ -3,7 +3,7 @@ import 'package:pinger/models/message.dart';
 
 class ConversationSnippet {
   final String id;
-  final String conversationID;
+  final String chatID;
   final String image;
   final String lastMessage;
   final String name;
@@ -11,7 +11,7 @@ class ConversationSnippet {
   final Timestamp timestamp;
 
   ConversationSnippet(
-      {this.conversationID,
+      {this.chatID,
       this.id,
       this.lastMessage,
       this.unseenCount,
@@ -21,9 +21,10 @@ class ConversationSnippet {
 
   factory ConversationSnippet.fromFirestore(DocumentSnapshot _snapshot) {
     var _data = _snapshot.data();
+
     return ConversationSnippet(
-      id: _snapshot.documentID,
-      conversationID: _data["conversationID"],
+      id: _snapshot.id,
+      chatID: _data["chatID"],
       lastMessage: _data["lastMessage"] != null ? _data["lastMessage"] : "",
       unseenCount: _data["unseenCount"],
       timestamp: _data["timestamp"],
@@ -40,6 +41,7 @@ class Conversation {
   final String ownerID;
 
   Conversation({this.id, this.members, this.ownerID, this.messages});
+
   factory Conversation.fromFirestore(DocumentSnapshot _snapshot) {
     var _data = _snapshot.data();
     List _messages = _data["messages"];

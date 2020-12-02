@@ -39,19 +39,28 @@ class RecentConversationsPage extends StatelessWidget {
             builder: (_context, _snapshot) {
               var _data = _snapshot.data;
 
-              // print("getting User Conversationsssssss${_snapshot.data}");
-
               return _snapshot.hasData
                   ? ListView.builder(
                       itemCount: _data.length,
                       itemBuilder: (_context, _index) {
                         return ListTile(
                           onTap: () {
+                            print("1");
+                            print(_data[_index].chatID);
+                            print("2");
+
+                            print(_data[_index].id);
+                            print("3");
+
+                            print(_data[_index].name);
+                            print("4");
+
+                            print(_data[_index].image);
                             NavigationService.instance.navigateToRoute(
                               MaterialPageRoute(
                                 builder: (BuildContext _context) {
                                   return ConversationPage(
-                                      _data[_index].conversationID,
+                                      _data[_index].chatID,
                                       _data[_index].id,
                                       _data[_index].name,
                                       _data[_index].image);
@@ -59,10 +68,7 @@ class RecentConversationsPage extends StatelessWidget {
                               ),
                             );
                           },
-                          // title: Text("Tolu"),
-                          //TODO: WORK ON THAT
                           title: Text(_data[_index].name),
-                          // subtitle: Text("Subtite"),
                           subtitle: Text(_data[_index].lastMessage),
                           tileColor: Colors
                               .white, //TODO: maybe change that color some where else
