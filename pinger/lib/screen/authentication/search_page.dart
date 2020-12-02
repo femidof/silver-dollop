@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:pinger/models/contact.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:pinger/services/navigation_service.dart';
+import 'package:pinger/screen/authentication/conversation_page.dart';
 
 class SearchPage extends StatefulWidget {
   double _height;
@@ -96,6 +98,7 @@ class _SearchPageState extends State<SearchPage> {
                   itemBuilder: (BuildContext _context, int _index) {
                     var _userData = _usersData[_index];
                     var _currentTime = DateTime.now();
+                    var _recepientID = _usersData[_index].id;
                     //TODO: work on this gave a 'to date was called on null error'.
 
                     // var _isUserActive = !_userData.lastseen.toDate().isBefore(
@@ -106,16 +109,21 @@ class _SearchPageState extends State<SearchPage> {
                     //       ),
                     //     );
 
-                    // print("userdata");
-                    // print(_userData);
-                    // print("userData.lastseen");
-                    // print(_userData.lastseen);
-                    // print("userData.lastseen.todate");
-                    // print(_userData.lastseen.toDate());
-                    // print("userData.lastseen.todate.is before");
-                    // print(_userData.lastseen.toDate().isBefore);
-
                     return ListTile(
+                      onTap: () {
+                        DBService.instance.createOrGetConversation(
+                          _auth.user.uid,
+                          _recepientID,
+                          (String _chatID) {
+                            NavigationService.instance.navigateToRoute(
+                              MaterialPageRoute(builder: (_context) {
+                                return ConversationPage(_chatID, _recepientID,
+                                    _userData.name, _userData.image);
+                              }),
+                            );
+                          },
+                        );
+                      },
                       // title: Text("Tolu "),
                       title: Text(_userData.name),
                       leading: Container(
@@ -124,7 +132,7 @@ class _SearchPageState extends State<SearchPage> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
                           image: DecorationImage(
-                            fit: BoxFit.fill,
+                            fit: BoxFit.cover,
                             image: NetworkImage(_userData.image),
                           ),
                         ),

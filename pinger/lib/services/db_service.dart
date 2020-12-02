@@ -85,14 +85,25 @@ class DBService {
         .collection(_conversationCollections);
 
     try {
-      var conversation =
-          await _userConversationRef.document(_recepientID).get();
+      var conversation = await _userConversationRef.doc(_recepientID).get();
 
-      //TODO: continue from 4:45 error bellow
       if (conversation.data != null) {
+        //TODO:Error here
         // return _onSuccess(conversation.data["chatID"]);
+      } else {
+        var _conversationRef = _ref.doc();
+        await _conversationRef.set(
+          {
+            "members": [_currentID, _recepientID],
+            "ownerID": _currentID,
+            "messages": [],
+          },
+        );
+        return _onSuccess(_conversationRef.id);
       }
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
   }
 
   Stream<List<ConversationSnippet>> getUserConversations(String _userID) {
