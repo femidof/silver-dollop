@@ -4,6 +4,7 @@ import 'package:pinger/auth/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:pinger/models/contact.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class SearchPage extends StatefulWidget {
   double _height;
@@ -84,6 +85,9 @@ class _SearchPageState extends State<SearchPage> {
       stream: DBService.instance.getUsersInDB(_searchText),
       builder: (_context, _snapshot) {
         var _usersData = _snapshot.data;
+        if (_usersData != null) {
+          _usersData.removeWhere((_contact) => _contact.id == _auth.user.uid);
+        }
         return _snapshot.hasData
             ? Container(
                 height: this.widget._height * 0.75,
@@ -94,13 +98,13 @@ class _SearchPageState extends State<SearchPage> {
                     var _currentTime = DateTime.now();
                     //TODO: work on this gave a 'to date was called on null error'.
 
-                    // var _isUserActive = !_userData.lastseen.toDate().isBefore(
-                    //       _currentTime.subtract(
-                    //         Duration(
-                    //           hours: 1,
-                    //         ),
-                    //       ),
-                    //     );
+                    var _isUserActive = !_userData.lastseen.toDate().isBefore(
+                          _currentTime.subtract(
+                            Duration(
+                              hours: 1,
+                            ),
+                          ),
+                        );
                     return ListTile(
                       // title: Text("Tolu "),
                       title: Text(_userData.name),
@@ -111,9 +115,7 @@ class _SearchPageState extends State<SearchPage> {
                           borderRadius: BorderRadius.circular(100),
                           image: DecorationImage(
                             fit: BoxFit.fill,
-                            image:
-                                //NetworkImage("https://i.pravatar.cc/150?img=3"),
-                                NetworkImage(_userData.image),
+                            image: NetworkImage(_userData.image),
                             //TODO: work on that
                             //image: NetworkImage(_data[index].image),
                           ),
@@ -125,24 +127,31 @@ class _SearchPageState extends State<SearchPage> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
                           //TODO: wot
-                          // _isUserActive
-                          //     ? Text(
-                          //         "Active now",
-                          //         style: TextStyle(fontSize: 15),
-                          //       )
-                          //     : Text(
-                          //         "Last Seen",
-                          //         style: TextStyle(fontSize: 15),
-                          //       ),
-
-                          Text(
-                            "Last Seen",
-                            style: TextStyle(fontSize: 15),
-                          ),
-                          Text(
-                            "Active now",
-                            style: TextStyle(fontSize: 15),
-                          ),
+                          _isUserActive
+                              ? Text(
+                                  "Active now",
+                                  style: TextStyle(fontSize: 15),
+                                )
+                              : Text(
+                                  "Last Seen",
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                          _isUserActive
+                              ? Container(
+                                  height: 10,
+                                  width: 10,
+                                  decoration: BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius: BorderRadius.circular(100),
+                                  ),
+                                )
+                              : Text(
+                                  timeago.format(
+                                    _userData.lastseen.toDate(),
+                                  ),
+                                  // "About an hour ago",
+                                  style: TextStyle(fontSize: 15),
+                                ),
                         ],
                       ),
                     );

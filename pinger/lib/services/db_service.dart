@@ -52,7 +52,10 @@ class DBService {
   }
 
   Stream<List<Contact>> getUsersInDB(String _searchName) {
-    var _ref = _db.collection(_userCollection);
+    var _ref = _db
+        .collection(_userCollection)
+        .where("name", isGreaterThanOrEqualTo: _searchName)
+        .where("name", isLessThan: _searchName + 'z');
     return _ref.getDocuments().asStream().map((_snapshot) {
       return _snapshot.documents.map((_doc) {
         return Contact.fromFirestore(_doc);
