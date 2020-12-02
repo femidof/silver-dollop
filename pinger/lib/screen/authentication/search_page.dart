@@ -98,13 +98,23 @@ class _SearchPageState extends State<SearchPage> {
                     var _currentTime = DateTime.now();
                     //TODO: work on this gave a 'to date was called on null error'.
 
-                    var _isUserActive = !_userData.lastseen.toDate().isBefore(
-                          _currentTime.subtract(
-                            Duration(
-                              hours: 1,
-                            ),
-                          ),
-                        );
+                    // var _isUserActive = !_userData.lastseen.toDate().isBefore(
+                    //       _currentTime.subtract(
+                    //         Duration(
+                    //           hours: 1,
+                    //         ),
+                    //       ),
+                    //     );
+
+                    // print("userdata");
+                    // print(_userData);
+                    // print("userData.lastseen");
+                    // print(_userData.lastseen);
+                    // print("userData.lastseen.todate");
+                    // print(_userData.lastseen.toDate());
+                    // print("userData.lastseen.todate.is before");
+                    // print(_userData.lastseen.toDate().isBefore);
+
                     return ListTile(
                       // title: Text("Tolu "),
                       title: Text(_userData.name),
@@ -127,31 +137,31 @@ class _SearchPageState extends State<SearchPage> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
                           //TODO: wot
-                          _isUserActive
-                              ? Text(
-                                  "Active now",
-                                  style: TextStyle(fontSize: 15),
-                                )
-                              : Text(
-                                  "Last Seen",
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                          _isUserActive
-                              ? Container(
-                                  height: 10,
-                                  width: 10,
-                                  decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                )
-                              : Text(
-                                  timeago.format(
-                                    _userData.lastseen.toDate(),
-                                  ),
-                                  // "About an hour ago",
-                                  style: TextStyle(fontSize: 15),
-                                ),
+                          // _isUserActive
+                          //     ? Text(
+                          //         "Active now",
+                          //         style: TextStyle(fontSize: 15),
+                          //       )
+                          //     : Text(
+                          //         "Last Seen",
+                          //         style: TextStyle(fontSize: 15),
+                          //       ),
+                          // _isUserActive
+                          //     ? Container(
+                          //         height: 10,
+                          //         width: 10,
+                          //         decoration: BoxDecoration(
+                          //           color: Colors.green,
+                          //           borderRadius: BorderRadius.circular(100),
+                          //         ),
+                          //       )
+                          //     : Text(
+                          //         timeago.format(
+                          //           _userData.lastseen.toDate(),
+                          //         ),
+                          //         // "About an hour ago",
+                          //         style: TextStyle(fontSize: 15),
+                          //       ),
                         ],
                       ),
                     );
