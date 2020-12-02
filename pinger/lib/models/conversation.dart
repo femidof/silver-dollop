@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pinger/models/message.dart';
 
 class ConversationSnippet {
   final String id;
@@ -29,5 +30,40 @@ class ConversationSnippet {
       name: _data["name"],
       image: _data["image"],
     );
+  }
+}
+
+class Conversation {
+  final String id;
+  final List<String> members;
+  final List<Message> messages;
+  final String ownerID;
+
+  Conversation({this.id, this.members, this.ownerID, this.messages});
+  factory Conversation.fromFirestore(DocumentSnapshot _snapshot) {
+    var _data = _snapshot.data();
+    List _messages = _data["messages"];
+    if (_messages != null) {
+      _messages = _messages
+          .map(
+            (e) => (_m) {
+              var _messageType =
+                  _m["type"] == "tet" ? MessageType.Text : MessageType.Image;
+              return Message(
+                  senderID: _m["senderID"],
+                  content: _m["content"],
+                  timestamp: _m["timestamp"],
+                  type: _messageType);
+            },
+          )
+          .toList();
+    } else {
+      _messages = null;
+    }
+    return Conversation(
+        id: _snapshot.documentID,
+        members: _data["members"],
+        ownerID: _data["ownerID"],
+        messages: _messages);
   }
 }
