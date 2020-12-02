@@ -44,19 +44,17 @@ class Conversation {
     var _data = _snapshot.data();
     List _messages = _data["messages"];
     if (_messages != null) {
-      _messages = _messages
-          .map(
-            (e) => (_m) {
-              var _messageType =
-                  _m["type"] == "tet" ? MessageType.Text : MessageType.Image;
-              return Message(
-                  senderID: _m["senderID"],
-                  content: _m["message"],
-                  timestamp: _m["timestamp"],
-                  type: _messageType);
-            },
-          )
-          .toList();
+      _messages = _messages.map(
+        (_m) {
+          var _messageType =
+              _m["type"] == "text" ? MessageType.Text : MessageType.Image;
+          return Message(
+              senderID: _m["senderID"],
+              content: _m["message"],
+              timestamp: _m["timestamp"],
+              type: _messageType);
+        },
+      ).toList();
     } else {
       _messages = null;
     }

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pinger/services/db_service.dart';
+import 'package:pinger/models/conversation.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class ConversationPage extends StatefulWidget {
   String _conversationID;
@@ -46,10 +49,24 @@ class _ConversationPageState extends State<ConversationPage> {
     return Container(
       height: _deviceHeight * .75,
       width: _deviceWidth,
-      child: ListView.builder(
-        itemCount: 1,
-        itemBuilder: (BuildContext _context, int _index) {
-          return _textMessageBubble(true, "hello");
+      child: StreamBuilder<Conversation>(
+        stream: DBService.instance.getConversation(this.widget._conversationID),
+        builder: (BuildContext _context, _snapshot) {
+          var _conversationData = _snapshot.data;
+          if (_conversationData != null) {
+            return ListView.builder(
+              itemCount: _conversationData.messages.length,
+              itemBuilder: (BuildContext _context, int _index) {
+                var _message = _conversationData.messages[_index];
+                return _textMessageBubble(true, _message.content);
+              },
+            );
+          } else {
+            return SpinKitWanderingCubes(
+              color: Colors.white,
+              size: 50,
+            );
+          }
         },
       ),
     );
