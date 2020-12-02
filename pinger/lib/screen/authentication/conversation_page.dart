@@ -4,6 +4,7 @@ import 'package:pinger/models/conversation.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:pinger/auth/auth.dart';
+import 'package:pinger/models/message.dart';
 
 class ConversationPage extends StatefulWidget {
   String _conversationID;
@@ -67,12 +68,13 @@ class _ConversationPageState extends State<ConversationPage> {
           var _conversationData = _snapshot.data;
           if (_conversationData != null) {
             return ListView.builder(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               itemCount: _conversationData.messages.length,
               itemBuilder: (BuildContext _context, int _index) {
                 var _message = _conversationData.messages[_index];
                 bool _isOwnMessage = _message.senderID ==
                     _auth.user.uid; //to tell who own the message
-                return _textMessageBubble(_isOwnMessage, _message.content);
+                return _messageListViewChild(_isOwnMessage, _message);
               },
             );
           } else {
@@ -82,6 +84,38 @@ class _ConversationPageState extends State<ConversationPage> {
             );
           }
         },
+      ),
+    );
+  }
+
+  Widget _messageListViewChild(bool _isOwnMessage, Message _message) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 10),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment:
+            _isOwnMessage ? MainAxisAlignment.end : MainAxisAlignment.start,
+        children: <Widget>[
+          !_isOwnMessage ? _userImageWidget() : Container(),
+          _textMessageBubble(_isOwnMessage, _message.content),
+        ],
+      ),
+    );
+  }
+
+  Widget _userImageWidget() {
+    double _imageRadius = _deviceHeight * 0.05;
+
+    return Container(
+      height: _imageRadius,
+      width: _imageRadius,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(500),
+        image: DecorationImage(
+          fit: BoxFit.cover,
+          image: NetworkImage(this.widget._receiverImage),
+        ),
       ),
     );
   }
