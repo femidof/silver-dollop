@@ -24,7 +24,14 @@ class _ConversationPageState extends State<ConversationPage> {
   double _deviceHeight;
   double _deviceWidth;
 
+  GlobalKey<FormState> _formKey;
   AuthProvider _auth;
+
+  String _messageText;
+  _ConversationPageState() {
+    _formKey = GlobalKey<FormState>();
+    _messageText = "";
+  }
   @override
   Widget build(BuildContext context) {
     _deviceHeight = MediaQuery.of(context).size.height;
@@ -159,6 +166,7 @@ class _ConversationPageState extends State<ConversationPage> {
       margin: EdgeInsets.symmetric(
           horizontal: _deviceWidth * .04, vertical: _deviceHeight * .03),
       child: Form(
+        key: _formKey,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           mainAxisSize: MainAxisSize.max,
@@ -182,8 +190,14 @@ class _ConversationPageState extends State<ConversationPage> {
           }
           return null;
         },
-        onChanged: (_input) {},
-        onSaved: (_input) {},
+        onChanged: (_input) {
+          _formKey.currentState.save();
+        },
+        onSaved: (_input) {
+          setState(() {
+            _messageText = _input;
+          });
+        },
         cursorColor: Colors.white,
         decoration: InputDecoration(
             border: InputBorder.none, hintText: "Put your message here"),
