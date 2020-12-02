@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pinger/services/db_service.dart';
 import 'package:pinger/models/conversation.dart';
@@ -213,7 +215,20 @@ class _ConversationPageState extends State<ConversationPage> {
       child: IconButton(
         icon: Icon(Icons.send),
         color: Colors.white,
-        onPressed: () {},
+        onPressed: () {
+          if (_formKey.currentState.validate()) {
+            DBService.instance.sendMessage(
+              this.widget._conversationID,
+              Message(
+                  content: _messageText,
+                  timestamp: Timestamp.now(),
+                  senderID: _auth.user.uid,
+                  type: MessageType.Text),
+            );
+            _formKey.currentState.reset();
+            FocusScope.of(_context).unfocus();
+          }
+        },
       ),
     );
   }

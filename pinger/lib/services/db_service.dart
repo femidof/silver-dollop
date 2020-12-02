@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pinger/models/contact.dart';
 import 'package:pinger/models/conversation.dart';
+import 'package:pinger/models/message.dart';
 
 class DBService {
   static DBService instance = DBService();
@@ -42,6 +43,37 @@ class DBService {
   Future<void> updateUserLastSeenTime(String _userID) {
     var _ref = _db.collection(_userCollection).document(_userID);
     return _ref.update({"lastSeen": Timestamp.now()});
+  }
+
+  Future<void> sendMessage(String _conversationID, Message _message) {
+    var _ref =
+        _db.collection(_conversationCollections).document(_conversationID);
+    var _messageType = "";
+    switch (_message.type) {
+      case MessageType.Text:
+        _messageType = "text";
+        break;
+
+      case MessageType.Image:
+        _messageType = "image";
+        break;
+
+      default:
+    }
+    return _ref.updateData(
+      {
+        "messages": FieldValue.arrayUnion(
+          [
+            {
+              "message": _message.content,
+              "senderID": _message.senderID,
+              "timestamp": _message.timestamp,
+              "type": _messageType,
+            },
+          ],
+        ),
+      },
+    );
   }
 
   Stream<List<ConversationSnippet>> getUserConversations(String _userID) {
