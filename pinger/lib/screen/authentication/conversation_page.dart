@@ -31,7 +31,6 @@ class _ConversationPageState extends State<ConversationPage> {
     _deviceWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      //TODO: Error. Range error index. invalid value
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,
@@ -52,6 +51,10 @@ class _ConversationPageState extends State<ConversationPage> {
           overflow: Overflow.visible,
           children: <Widget>[
             _messageListView(),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: _messageField(_context),
+            ),
           ],
         );
       },
@@ -142,6 +145,61 @@ class _ConversationPageState extends State<ConversationPage> {
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[Text(_message)],
+      ),
+    );
+  }
+
+  Widget _messageField(BuildContext _context) {
+    return Container(
+      height: _deviceHeight * 0.08,
+      decoration: BoxDecoration(
+        color: Color.fromRGBO(43, 43, 43, 1),
+        borderRadius: BorderRadius.circular(100),
+      ),
+      margin: EdgeInsets.symmetric(
+          horizontal: _deviceWidth * .04, vertical: _deviceHeight * .03),
+      child: Form(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            _messageTextField(),
+            _sendMessageButton(_context),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _messageTextField() {
+    return SizedBox(
+      width: _deviceWidth * .55,
+      child: TextFormField(
+        validator: (_input) {
+          if (_input.length == 0) {
+            return "Put message here";
+          }
+          return null;
+        },
+        onChanged: (_input) {},
+        onSaved: (_input) {},
+        cursorColor: Colors.white,
+        decoration: InputDecoration(
+            border: InputBorder.none, hintText: "Put your message here"),
+        autocorrect: false,
+      ),
+    );
+  }
+
+  Widget _sendMessageButton(BuildContext _context) {
+    return Container(
+      height: _deviceHeight * .05,
+      width: _deviceWidth * .05,
+      child: IconButton(
+        icon: Icon(Icons.send),
+        color: Colors.white,
+        onPressed: () {},
       ),
     );
   }
