@@ -76,6 +76,25 @@ class DBService {
     );
   }
 
+  Future<void> createOrGetConversation(String _currentID, String _recepientID,
+      Future<void> _onSuccess(String _conversationID)) async {
+    var _ref = _db.collection(_conversationCollections);
+    var _userConversationRef = _db
+        .collection(_userCollection)
+        .document(_currentID)
+        .collection(_conversationCollections);
+
+    try {
+      var conversation =
+          await _userConversationRef.document(_recepientID).get();
+
+      //TODO: continue from 4:45 error bellow
+      if (conversation.data != null) {
+        // return _onSuccess(conversation.data["conversationID"]);
+      }
+    } catch (e) {}
+  }
+
   Stream<List<ConversationSnippet>> getUserConversations(String _userID) {
     var _ref = _db
         .collection(_userCollection)
@@ -103,6 +122,9 @@ class DBService {
   Stream getConversation(String _conversationID) {
     var _ref =
         _db.collection(_conversationCollections).document(_conversationID);
+    print("i'm here myyyyyyy");
+    print("tis is refeference");
+    print(_ref);
     return _ref.snapshots().map(
       (_snapshot) {
         return Conversation.fromFirestore(_snapshot);

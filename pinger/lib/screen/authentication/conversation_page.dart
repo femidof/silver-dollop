@@ -75,12 +75,16 @@ class _ConversationPageState extends State<ConversationPage> {
   }
 
   Widget _messageListView() {
+    print("in here ");
     return Container(
       height: _deviceHeight * .75,
       width: _deviceWidth,
-      child: StreamBuilder<Conversation>(
+      child: StreamBuilder<dynamic>(
+        //was changed form Conversation
         stream: DBService.instance.getConversation(this.widget._conversationID),
         builder: (BuildContext _context, _snapshot) {
+          print("tis is snapshot");
+          print(_snapshot);
           Timer(
             Duration(milliseconds: 50),
             () => {
