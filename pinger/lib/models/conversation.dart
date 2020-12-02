@@ -35,7 +35,7 @@ class ConversationSnippet {
 
 class Conversation {
   final String id;
-  final List<String> members;
+  final List members;
   final List<Message> messages;
   final String ownerID;
 
@@ -51,7 +51,7 @@ class Conversation {
                   _m["type"] == "tet" ? MessageType.Text : MessageType.Image;
               return Message(
                   senderID: _m["senderID"],
-                  content: _m["content"],
+                  content: _m["message"],
                   timestamp: _m["timestamp"],
                   type: _messageType);
             },
