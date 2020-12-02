@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pinger/services/db_service.dart';
 import 'package:pinger/models/conversation.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/provider.dart';
+import 'package:pinger/auth/auth.dart';
 
 class ConversationPage extends StatefulWidget {
   String _conversationID;
@@ -20,6 +22,8 @@ class ConversationPage extends StatefulWidget {
 class _ConversationPageState extends State<ConversationPage> {
   double _deviceHeight;
   double _deviceWidth;
+
+  AuthProvider _auth;
   @override
   Widget build(BuildContext context) {
     _deviceHeight = MediaQuery.of(context).size.height;
@@ -32,16 +36,24 @@ class _ConversationPageState extends State<ConversationPage> {
         backgroundColor: Colors.blueGrey,
         title: Text(this.widget._receivername),
       ),
-      body: _conversatioinPageUI(),
+      body: ChangeNotifierProvider<AuthProvider>.value(
+        value: AuthProvider.instance,
+        child: _conversatioinPageUI(),
+      ),
     );
   }
 
   Widget _conversatioinPageUI() {
-    return Stack(
-      overflow: Overflow.visible,
-      children: <Widget>[
-        _messageListView(),
-      ],
+    return Builder(
+      builder: (BuildContext _context) {
+        _auth = Provider.of<AuthProvider>(_context);
+        return Stack(
+          overflow: Overflow.visible,
+          children: <Widget>[
+            _messageListView(),
+          ],
+        );
+      },
     );
   }
 
@@ -58,7 +70,9 @@ class _ConversationPageState extends State<ConversationPage> {
               itemCount: _conversationData.messages.length,
               itemBuilder: (BuildContext _context, int _index) {
                 var _message = _conversationData.messages[_index];
-                return _textMessageBubble(true, _message.content);
+                bool _isOwnMessage = _message.senderID ==
+                    _auth.user.uid; //to tell who own the message
+                return _textMessageBubble(_isOwnMessage, _message.content);
               },
             );
           } else {
