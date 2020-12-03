@@ -99,7 +99,7 @@ class _RegistrationPageState extends State<RegisterationPage> {
 
   Widget _inputForm() {
     return Container(
-      height: _deviceHeight * 0.35,
+      // height: _deviceHeight * 0.35,
       child: Form(
         key: _formKey,
         onChanged: () {
@@ -128,7 +128,7 @@ class _RegistrationPageState extends State<RegisterationPage> {
 
           setState(() {
             _image = _imageFile;
-            _image = _imageFile;
+            // _image = _imageFile;
           });
         },
         child: Container(

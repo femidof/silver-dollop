@@ -103,8 +103,6 @@ class _ConversationPageState extends State<ConversationPage> {
               },
             );
           } else {
-            print("failure. not working show");
-
             return SpinKitWanderingCubes(
               color: Colors.white,
               size: 50,

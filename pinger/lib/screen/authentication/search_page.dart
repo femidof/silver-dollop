@@ -43,10 +43,12 @@ class _SearchPageState extends State<SearchPage> {
       builder: (BuildContext _context) {
         _auth = Provider.of<AuthProvider>(_context);
 
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        return
+            //  Column(
+            //   mainAxisAlignment: MainAxisAlignment.start,
+            //   mainAxisSize: MainAxisSize.max,
+            //   crossAxisAlignment: CrossAxisAlignment.center,
+            ListView(
           children: <Widget>[
             _userSearchField(),
             _usersListView(),
@@ -101,13 +103,14 @@ class _SearchPageState extends State<SearchPage> {
                     var _recepientID = _usersData[_index].id;
                     //TODO: work on this gave a 'to date was called on null error'.
 
-                    // var _isUserActive = !_userData.lastseen.toDate().isBefore(
-                    //       _currentTime.subtract(
-                    //         Duration(
-                    //           hours: 1,
-                    //         ),
-                    //       ),
-                    //     );
+                    // print("object object object ${_userData.lastseen}");
+                    var _isUserActive = !_userData.lastseen.toDate().isBefore(
+                          _currentTime.subtract(
+                            Duration(
+                              hours: 1,
+                            ),
+                          ),
+                        );
 
                     return ListTile(
                       onTap: () {
@@ -143,31 +146,31 @@ class _SearchPageState extends State<SearchPage> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
                           //TODO: wot
-                          // _isUserActive
-                          //     ? Text(
-                          //         "Active now",
-                          //         style: TextStyle(fontSize: 15),
-                          //       )
-                          //     : Text(
-                          //         "Last Seen",
-                          //         style: TextStyle(fontSize: 15),
-                          //       ),
-                          // _isUserActive
-                          //     ? Container(
-                          //         height: 10,
-                          //         width: 10,
-                          //         decoration: BoxDecoration(
-                          //           color: Colors.green,
-                          //           borderRadius: BorderRadius.circular(100),
-                          //         ),
-                          //       )
-                          //     : Text(
-                          //         timeago.format(
-                          //           _userData.lastseen.toDate(),
-                          //         ),
-                          //         // "About an hour ago",
-                          //         style: TextStyle(fontSize: 15),
-                          //       ),
+                          _isUserActive
+                              ? Text(
+                                  "Active now",
+                                  style: TextStyle(fontSize: 15),
+                                )
+                              : Text(
+                                  "Last Seen",
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                          _isUserActive
+                              ? Container(
+                                  height: 10,
+                                  width: 10,
+                                  decoration: BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius: BorderRadius.circular(100),
+                                  ),
+                                )
+                              : Text(
+                                  timeago.format(
+                                    _userData.lastseen.toDate(),
+                                  ),
+                                  // "About an hour ago",
+                                  style: TextStyle(fontSize: 15),
+                                ),
                         ],
                       ),
                     );
