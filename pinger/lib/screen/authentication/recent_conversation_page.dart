@@ -32,70 +32,69 @@ class RecentConversationsPage extends StatelessWidget {
       builder: (BuildContext _context) {
         var _auth = Provider.of<AuthProvider>(_context);
         return Container(
-            height: _height,
-            width: _width,
-            child: StreamBuilder<List<ConversationSnippet>>(
-              stream: DBService.instance.getUserConversations(_auth.user.uid),
-              builder: (_context, _snapshot) {
-                var _data = _snapshot.data;
+          height: _height,
+          width: _width,
+          child: StreamBuilder<List<ConversationSnippet>>(
+            stream: DBService.instance.getUserConversations(_auth.user.uid),
+            builder: (_context, _snapshot) {
+              var _data = _snapshot.data;
 
-                // print("getting User Conversationsssssss${_snapshot.data}");
+              return _snapshot.hasData
+                  ? ListView.builder(
+                      itemCount: _data.length,
+                      itemBuilder: (_context, _index) {
+                        return ListTile(
+                          onTap: () {
+                            print("1");
+                            print(_data[_index].chatID);
+                            print("2");
 
-                //TODO: WORK ON THAT
-                return _snapshot.hasData
-                    ? ListView.builder(
-                        // itemCount: 1,
-                        //TODO: work on that
-                        itemCount: _data.length,
-                        itemBuilder: (_context, _index) {
-                          return ListTile(
-                            onTap: () {
-                              NavigationService.instance.navigateToRoute(
-                                MaterialPageRoute(
-                                  builder: (BuildContext _context) {
-                                    return ConversationPage(
-                                        _data[_index].conversationID,
-                                        _data[_index].id,
-                                        _data[_index].name,
-                                        _data[_index].image);
-                                  },
-                                ),
-                              );
-                            },
-                            // title: Text("Tolu"),
-                            //TODO: WORK ON THAT
-                            title: Text(_data[_index].name),
-                            // subtitle: Text("Subtite"),
-                            subtitle: Text(_data[_index].lastMessage),
-                            tileColor: Colors
-                                .white, //TODO: maybe change that color some where else
-                            leading: Container(
-                              width: 50,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  // image: NetworkImage(
-                                  //     "https://i.pravatar.cc/150?img=3"),
-                                  //TODO: work on that
-                                  image: NetworkImage(_data[_index].image),
-                                ),
+                            print(_data[_index].id);
+                            print("3");
+
+                            print(_data[_index].name);
+                            print("4");
+
+                            print(_data[_index].image);
+                            NavigationService.instance.navigateToRoute(
+                              MaterialPageRoute(
+                                builder: (BuildContext _context) {
+                                  return ConversationPage(
+                                      _data[_index].chatID,
+                                      _data[_index].id,
+                                      _data[_index].name,
+                                      _data[_index].image);
+                                },
+                              ),
+                            );
+                          },
+                          title: Text(_data[_index].name),
+                          subtitle: Text(_data[_index].lastMessage),
+                          tileColor: Colors
+                              .white, //TODO: maybe change that color some where else
+                          leading: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(_data[_index].image),
                               ),
                             ),
-                            trailing: _listTileTrailingWidgets(
-                                _data[_index].timestamp),
-
-                            // _listTileTrailingWidgets(_data[_index].timestamp),
-                          );
-                        },
-                      )
-                    : SpinKitWanderingCubes(
-                        color: Colors.white,
-                        size: 50,
-                      );
-              },
-            ));
+                          ),
+                          trailing:
+                              _listTileTrailingWidgets(_data[_index].timestamp),
+                        );
+                      },
+                    )
+                  : SpinKitWanderingCubes(
+                      color: Colors.white,
+                      size: 50,
+                    );
+            },
+          ),
+        );
       },
     );
   }
